@@ -1,0 +1,502 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Central do Povão</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f1115;
+      color: white;
+      padding-bottom: 120px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      padding: 24px 18px;
+      background: linear-gradient(135deg, #ff6b00, #ff2d55);
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      opacity: 0.95;
+      line-height: 1.5;
+    }
+
+    .search {
+      margin-top: 18px;
+      width: 100%;
+      border: none;
+      outline: none;
+      padding: 15px;
+      border-radius: 14px;
+      font-size: 15px;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      backdrop-filter: blur(10px);
+    }
+
+    .search::placeholder {
+      color: rgba(255,255,255,0.75);
+    }
+
+    .categories {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 18px;
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category {
+      min-width: fit-content;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: #1a1d24;
+      border: 1px solid #2b303a;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .category:hover {
+      background: #ff6b00;
+      border-color: #ff6b00;
+    }
+
+    .section {
+      padding: 0 18px;
+      margin-top: 18px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .section-title h2 {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .badge {
+      background: #ff2d55;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #1a1d24;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid #2b303a;
+      transition: 0.25s;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #ff6b00;
+    }
+
+    .card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 16px;
+    }
+
+    .price {
+      color: #00ff95;
+      font-size: 26px;
+      font-weight: 800;
+      margin: 10px 0;
+    }
+
+    .old-price {
+      color: #999;
+      text-decoration: line-through;
+      font-size: 14px;
+      margin-left: 6px;
+    }
+
+    .description {
+      color: #c9c9c9;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .top-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #ff2d55;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+
+    .timer {
+      background: rgba(255,107,0,0.15);
+      color: #ff9d5c;
+      border: 1px solid rgba(255,107,0,0.25);
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .btn-order {
+      background: linear-gradient(135deg, #00c853, #00e676);
+      color: #08130d;
+    }
+
+    .btn-order:hover {
+      opacity: 0.92;
+    }
+
+    .btn-share {
+      background: #2b303a;
+      color: white;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+    }
+
+    .service-card {
+      background: #1a1d24;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid #2b303a;
+      text-align: center;
+    }
+
+    .service-card h3 {
+      margin: 12px 0 8px;
+    }
+
+    .service-card p {
+      color: #b0b0b0;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .mini-btn {
+      display: inline-block;
+      background: #ff6b00;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .jobs {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .job-card {
+      background: #1a1d24;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid #2b303a;
+    }
+
+    .job-card h3 {
+      margin-bottom: 6px;
+    }
+
+    .job-card p {
+      color: #c2c2c2;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .floating {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: #25d366;
+      color: white;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      z-index: 999;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 30px 18px;
+      text-align: center;
+      color: #9e9e9e;
+      font-size: 14px;
+    }
+
+    @media(max-width: 768px) {
+      .logo {
+        font-size: 26px;
+      }
+
+      .section-title h2 {
+        font-size: 20px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style></head>
+<body>  <header>
+    <div class="logo">🔥 Central do Povão</div>
+    <div class="subtitle">
+      As melhores promoções, delivery, empregos e achadinhos de Inhambupe em um só lugar.
+    </div><input class="search" type="text" placeholder="Buscar hambúrguer, promoção, vaga, serviço..." />
+
+  </header>  <div class="categories">
+    <div class="category">🍔 Delivery</div>
+    <div class="category">🔥 Promoções</div>
+    <div class="category">🛒 Achadinhos</div>
+    <div class="category">💼 Vagas</div>
+    <div class="category">🔧 Serviços</div>
+    <div class="category">❤️ Ajude alguém</div>
+  </div>  <section class="section">
+    <div class="section-title">
+      <h2>🔥 Promoções Relâmpago</h2>
+      <div class="badge">Hoje</div>
+    </div><div class="cards">
+
+  <div class="card">
+    <div class="top-tag">MAIS PEDIDO</div>
+
+    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200&auto=format&fit=crop" alt="Hamburguer" />
+
+    <div class="card-content">
+      <h3>Combo Brasa Burguer</h3>
+
+      <div class="price">
+        R$ 9,99
+        <span class="old-price">R$ 24,99</span>
+      </div>
+
+      <div class="timer">
+        ⏰ Oferta válida até às 18h
+      </div>
+
+      <div class="description">
+        Hambúrguer artesanal + batata + refrigerante. Frete grátis no primeiro pedido.
+      </div>
+
+      <div class="buttons">
+        <a href="https://wa.me/5575997142719?text=Olá,%20quero%20pedir%20o%20combo%20promoção" target="_blank" class="btn btn-order">Pedir Agora</a>
+        <button class="btn btn-share" onclick="shareOffer('Combo Brasa Burguer por R$ 9,99 🔥')">Compartilhar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top-tag">ESPETINHO</div>
+
+    <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=1200&auto=format&fit=crop" alt="Espetinho" />
+
+    <div class="card-content">
+      <h3>Espetinho na Brasa</h3>
+
+      <div class="price">
+        R$ 5,00
+        <span class="old-price">R$ 8,00</span>
+      </div>
+
+      <div class="timer">
+        🔥 Promoção da noite
+      </div>
+
+      <div class="description">
+        Carne e frango feitos na hora. Pedido rápido pelo WhatsApp.
+      </div>
+
+      <div class="buttons">
+        <a href="https://wa.me/5575997142719?text=Olá,%20quero%20pedir%20espetinho" target="_blank" class="btn btn-order">Pedir Agora</a>
+        <button class="btn btn-share" onclick="shareOffer('Espetinho por R$ 5,00 🔥')">Compartilhar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top-tag">ACHADINHO</div>
+
+    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop" alt="Celular" />
+
+    <div class="card-content">
+      <h3>iPhone XR Semi Novo</h3>
+
+      <div class="price">
+        R$ 1.250
+      </div>
+
+      <div class="description">
+        Bateria boa, funcionando perfeitamente. Aceita negociação.
+      </div>
+
+      <div class="buttons">
+        <a href="https://wa.me/5575997142719?text=Tenho%20interesse%20no%20iPhone%20XR" target="_blank" class="btn btn-order">Chamar</a>
+        <button class="btn btn-share" onclick="shareOffer('iPhone XR disponível 🔥')">Compartilhar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  </section>  <section class="section">
+    <div class="section-title">
+      <h2>🔧 Serviços Populares</h2>
+    </div><div class="services">
+
+  <div class="service-card">
+    <div style="font-size:40px">💅</div>
+    <h3>Manicure Ana</h3>
+    <p>Atendimento em domicílio.</p>
+    <a class="mini-btn" href="https://wa.me/5575997142719" target="_blank">WhatsApp</a>
+  </div>
+
+  <div class="service-card">
+    <div style="font-size:40px">🛵</div>
+    <h3>Moto Táxi Rápido</h3>
+    <p>Corridas rápidas pela cidade.</p>
+    <a class="mini-btn" href="https://wa.me/5575997142719" target="_blank">Chamar</a>
+  </div>
+
+  <div class="service-card">
+    <div style="font-size:40px">🔌</div>
+    <h3>Eletricista João</h3>
+    <p>Instalação e manutenção.</p>
+    <a class="mini-btn" href="https://wa.me/5575997142719" target="_blank">Orçamento</a>
+  </div>
+
+</div>
+
+  </section>  <section class="section">
+    <div class="section-title">
+      <h2>💼 Vagas e Bicos</h2>
+    </div><div class="jobs">
+
+  <div class="job-card">
+    <h3>🍔 Atendente para Lanchonete</h3>
+    <p>Período noturno • Não precisa experiência.</p>
+    <a class="mini-btn" href="https://wa.me/5575997142719" target="_blank">Tenho Interesse</a>
+  </div>
+
+  <div class="job-card">
+    <h3>🧱 Servente de Pedreiro</h3>
+    <p>Pagamento diário • Início imediato.</p>
+    <a class="mini-btn" href="https://wa.me/5575997142719" target="_blank">Entrar em Contato</a>
+  </div>
+
+</div>
+
+  </section>  <section class="section">
+    <div class="section-title">
+      <h2>❤️ Ajude Alguém</h2>
+    </div><div class="card">
+  <div class="card-content">
+    <h3>Vaquinha Solidária</h3>
+
+    <div class="description" style="margin-top:10px;">
+      Estamos arrecadando alimentos para famílias necessitadas da cidade.
+    </div>
+
+    <div class="buttons">
+      <a href="https://wa.me/5575997142719" target="_blank" class="btn btn-order">Quero Ajudar</a>
+      <button class="btn btn-share" onclick="shareOffer('Ajude famílias da cidade ❤️')">Compartilhar</button>
+    </div>
+  </div>
+</div>
+
+  </section>  <footer>
+    Central do Povão © 2026 • Feito para movimentar o comércio local 🚀
+  </footer>  <a class="floating" href="https://wa.me/5575997142719" target="_blank">
+    💬
+  </a>  <script>
+    function shareOffer(text) {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Central do Povão',
+          text: text,
+          url: window.location.href
+        });
+      } else {
+        alert('Compartilhe essa oferta nos grupos de WhatsApp 🔥');
+      }
+    }
+  </script></body>
+</html>
